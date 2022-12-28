@@ -1,0 +1,14 @@
+.full-page {
+  width: 100vw;
+}
+.btn-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.bar-row {
+  /* flex-direction: row; */
+  height: 60px;
+  align-content: space-between;
+
+  width: 50vw;
+}

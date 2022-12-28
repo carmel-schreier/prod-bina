@@ -1,0 +1,9 @@
+.about-page-container {
+  height: 45vw;
+}
+
+.about-container {
+  flex-direction: column;
+  text-align: center;
+  width: 60vw;
+}
