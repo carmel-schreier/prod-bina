@@ -1,0 +1,113 @@
+.hero {
+  background-image: url(/public/image-2.jpg);
+  background-size: cover;
+  background-position: 0% 50%;
+
+  height: 35vw;
+  width: 100%;
+  opacity: 0.9;
+  position: relative;
+
+  padding-top: 3vw;
+}
+
+.top-title {
+  font-size: 3vw;
+  opacity: 1;
+  font-weight: 700;
+  color: white;
+  margin-left: 5.2vw;
+
+  padding: 2vw;
+}
+.top-par {
+  font-size: 1.5vw;
+  width: 40%;
+  text-align: start;
+  /* ?padding: 2vw; */
+  color: white;
+  position: absolute;
+  left: 55%;
+  top: 6vw;
+  font-weight: 600;
+}
+
+.btn-container {
+  padding: 2vw 3vw;
+  margin-left: 4.2vw;
+}
+
+.middle {
+  height: 25vw;
+  width: 100%;
+
+  background-color: rgb(225, 234, 236);
+  position: relative;
+}
+
+.square {
+  margin: 3vw;
+  height: 22vw;
+}
+
+.items {
+  position: absolute;
+  top: -10vw;
+  padding: 0 5vw;
+}
+
+.square-1 {
+  background-color: rgb(225, 61, 61) !important;
+  padding: 5vw;
+}
+.square-1 h3 {
+  font-size: 1.9vw;
+}
+.square-2 {
+  background-color: #78be8d !important;
+
+  padding: 4vw;
+  padding-top: 3vw;
+}
+.square-2 h5 {
+  font-size: 1.2vw;
+  font-weight: 600;
+}
+.square-2 p {
+  font-size: 1.1vw;
+  line-height: 1.4vw;
+}
+.buy-sell-text {
+  color: white;
+  font-weight: 600;
+}
+.square-3 {
+  /* background-color: rgb(104, 115, 172) !important; */
+  background-color: #3f51b5 !important;
+  padding: 2vw;
+}
+
+.radio-line {
+  margin-left: 20px;
+}
+
+.interests-title {
+  margin-bottom: 20px;
+}
+
+.interests-section {
+  padding: 4vw;
+  background-color: white;
+}
+.lower-get-movie-btn {
+  display: flex;
+  width: 100%;
+  margin-top: 3vw;
+  justify-content: center;
+}
+
+.recommended-movies-section {
+  height: 10vw;
+  width: 100%;
+  background: linear-gradient(rgb(229, 225, 225), gray);
+}

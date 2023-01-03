@@ -1,0 +1,10 @@
+.add-container {
+  width: 18vw;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.btn-success {
+  --bs-btn-bg: #78be8d !important;
+  color: black !important;
+}
