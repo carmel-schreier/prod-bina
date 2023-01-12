@@ -1,7 +1,3 @@
-//import Checkbox from "@material-ui/core/Checkbox";
-//import FormControlLabel from "@material-ui/core/FormControlLabel";
-//import FormGroup from "@material-ui/core/FormGroup";
-//import { Label } from "@mui/icons-material";
 import Grid from "@material-ui/core/Grid";
 import {
   MonetizationOnOutlined,
@@ -15,8 +11,8 @@ import {
   CurrencyPoundOutlined,
   OilBarrelOutlined,
 } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import Interest, { InterestType } from "../Interest/Interest";
+import { useState } from "react";
+import Interest from "../Interest/Interest";
 import "./Interests.css";
 
 export interface InterestInfoType {
@@ -60,12 +56,6 @@ function Interests(props: InterestsProps) {
       icon: <ShowChartOutlined />,
       id: 2,
     },
-    // {
-    //   imageUrl: `buysell.jpg`,
-    //   name: `Buy/Sell Advise`,
-    //   description: `Something something!`,
-    //   id: 3,
-    // },
     {
       imageUrl: `coins-solid.svg`,
       name: `Currencies`,
@@ -121,7 +111,7 @@ function Interests(props: InterestsProps) {
                   <img
                     className="interest-icon"
                     src={interest.imageUrl}
-                    alt=""
+                    alt={interest.name}
                   />
                 </Grid>
                 <Grid item xs={12}>

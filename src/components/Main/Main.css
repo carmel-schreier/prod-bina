@@ -68,6 +68,8 @@
 
   padding: 4vw;
   padding-top: 3vw;
+  margin-top: -1vw;
+  height: 26vw;
 }
 .square-2 h5 {
   font-size: 1.2vw;
@@ -107,7 +109,7 @@
 }
 
 .recommended-movies-section {
-  height: 10vw;
+  height: 50vw;
   width: 100%;
   background: linear-gradient(rgb(229, 225, 225), gray);
 }

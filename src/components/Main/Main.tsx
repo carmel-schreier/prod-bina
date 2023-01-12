@@ -1,15 +1,14 @@
 import Interests, { InterestInfoType } from "../Interests/Interests";
 import { useState } from "react";
-import WatchList, { SecurityType } from "../WatchList/WatchList";
+import WatchList from "../WatchList/WatchList";
 import GetMovie from "../GetMovie/GetMovie";
-import "./Main.css";
 import AddBar from "../AddBar/AddBar";
-import BuySell from "../BuySell/BuySell";
-import { FormControl, Grid, Paper, Typography } from "@material-ui/core";
-import RecommSwitch from "../RecommSwitch/RecommSwitch";
-import NewRadio from "../NewRadio/NewRadio";
+import { Grid, Paper } from "@material-ui/core";
 import { ArrowDownward } from "@material-ui/icons";
-import CustomizedSwitch from "../RecommSwitch/gg";
+import RecommSwitch from "../RecommSwitch/RecommSwitch";
+import { onTheFlyEdition } from "../../services/apiService";
+import ActiveSymbols from "../ActiveSymbols/ActiveSymbols";
+import "./Main.css";
 
 const securities = [
   { ticker: "AAPL", name: "Apple Inc." },
@@ -26,7 +25,21 @@ function Main() {
     "KO",
     "TSLA",
   ]);
-  const [interestsArr, setInterestsArr] = useState<Array<string>>([]);
+  const [interestsArr, setInterestsArr] = useState<Array<string>>([
+    "stockAdvice",
+  ]);
+
+  //const [includeRecomm, setIncludeRecomm] = useState<boolean>(true);
+
+  function liftRecommState(checked: boolean) {
+    //setIncludeRecomm(checked);
+    checked === true
+      ? setInterestsArr([...interestsArr, "stockAdvice"])
+      : interestsArr.splice(
+          interestsArr.indexOf("stockAdvice"),
+          interestsArr.indexOf("stockAdvice") + 1
+        );
+  }
 
   const addSecurity = (value: string) => {
     let test = watchList.filter((x) => x === value)[0];
@@ -51,40 +64,13 @@ function Main() {
     setInterestsArr(interests);
   };
 
-  async function onTheFlyEdition() {
-    const onTheFlyServer = "gns.vynopsisprod.com";
-    const suite = "QA0";
-    const uid = -999;
-    const size = "720p"; //'480p','1080p';
-    const producer = 118;
-    const interests = interestsArr.toString();
-    const accountJson = `{"accountId":"123",  "accountName":"Michael Golan",
-                "voiceName":"mike",
-                "cash":123}&
-                holdings=[{"symbol":"OIL"}]`;
-    let url = `http://${onTheFlyServer}/videolink/?uid=${uid}&size=${size}&rrCount=&suite=${suite}&interests=${interests}&producer=${producer}&account=${accountJson}`;
-
-    fetch(url, {
-      method: "get",
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        window.open(
-          `http://${onTheFlyServer}${response}`,
-          "_blank",
-          "noopener,noreferrer"
-        );
-      });
-  }
-
   return (
     <>
       <div className="full-page  d-flex flex-column align-items-center">
         <div className="hero">
           <h4 className="top-title">Automated Financial Movies</h4>
           <div className="btn-container">
-            <GetMovie getMovie={onTheFlyEdition} />
+            <GetMovie getMovie={onTheFlyEdition} interestsArr={interestsArr} />
           </div>
           <p className=" top-par">
             Please set your interests preference and your securities watch-list,
@@ -100,7 +86,7 @@ function Main() {
                 <h3 className="buy-sell-text">
                   Include Buy/Sell Recommendations
                 </h3>
-                <CustomizedSwitch />
+                <RecommSwitch handleRecommSwitch={liftRecommState} />
               </Paper>
             </Grid>
             <Grid item md={4} xs={12}>
@@ -130,13 +116,20 @@ function Main() {
               <Grid xs={12}>
                 <Interests liftInterestsList={updateInterestsList} />
                 <div className="lower-get-movie-btn d-flax align-items-center">
-                  <GetMovie getMovie={onTheFlyEdition} />
+                  <GetMovie
+                    getMovie={onTheFlyEdition}
+                    interestsArr={interestsArr}
+                  />
                 </div>
               </Grid>
             </div>
           </Grid>
         </div>
-        <div className="recommended-movies-section">hi</div>
+        <div className="recommended-movies-section"></div>
+        <div className="recommended-movies-section-2">
+          <ActiveSymbols />
+        </div>
+        <div></div>
       </div>
     </>
   );

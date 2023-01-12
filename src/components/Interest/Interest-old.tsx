@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import RadiosForm from "../RadiosForm/RadiosForm";
 import "./Interest.css";
 
 export type InterestType = {

@@ -5,8 +5,7 @@ import {
   Radio,
   RadioGroup,
 } from "@material-ui/core";
-import React, { Children, FunctionComponent, useState } from "react";
-import RadiosForm from "../RadiosForm/RadiosForm";
+import React, { useState } from "react";
 import "./Interest.css";
 
 export type InterestType = {
