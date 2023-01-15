@@ -29,26 +29,34 @@ function Main() {
     "stockAdvice",
   ]);
 
+  const getInitialList = (otherActive: Array<string>) => {
+    console.log("otherActive = " + otherActive);
+    setWatchList(otherActive);
+  };
+
   //const [includeRecomm, setIncludeRecomm] = useState<boolean>(true);
 
-  function liftRecommState(checked: boolean) {
-    //setIncludeRecomm(checked);
-    checked === true
-      ? setInterestsArr([...interestsArr, "stockAdvice"])
-      : interestsArr.splice(
-          interestsArr.indexOf("stockAdvice"),
-          interestsArr.indexOf("stockAdvice") + 1
-        );
-  }
+  const getRecommPref = (checked: boolean) => {
+    if (checked) {
+      interestsArr.indexOf("-stockAdvice") > -1 &&
+        interestsArr.splice(interestsArr.indexOf("-stockAdvice"), 1);
+      setInterestsArr([...interestsArr, "stockAdvice"]);
+    } else {
+      interestsArr.indexOf("stockAdvice") > -1 &&
+        interestsArr.splice(interestsArr.indexOf("stockAdvice"), 1);
+      setInterestsArr([...interestsArr, "-stockAdvice"]);
+    }
+  };
 
   const addSecurity = (value: string) => {
     let test = watchList.filter((x) => x === value)[0];
     if (!test) {
-      watchList.push(value);
+      watchList.splice(2, 1);
+      watchList.unshift(value);
       setWatchList([...watchList]);
     }
   };
-
+  console.log("watchList = " + watchList);
   const resetList = () => {
     setWatchList([]);
   };
@@ -70,7 +78,11 @@ function Main() {
         <div className="hero">
           <h4 className="top-title">Automated Financial Movies</h4>
           <div className="btn-container">
-            <GetMovie getMovie={onTheFlyEdition} interestsArr={interestsArr} />
+            <GetMovie
+              getMovie={onTheFlyEdition}
+              interestsArr={interestsArr}
+              symbolArr={watchList}
+            />
           </div>
           <p className=" top-par">
             Please set your interests preference and your securities watch-list,
@@ -86,7 +98,7 @@ function Main() {
                 <h3 className="buy-sell-text">
                   Include Buy/Sell Recommendations
                 </h3>
-                <RecommSwitch handleRecommSwitch={liftRecommState} />
+                <RecommSwitch handleRecommSwitch={getRecommPref} />
               </Paper>
             </Grid>
             <Grid item md={4} xs={12}>
@@ -119,6 +131,7 @@ function Main() {
                   <GetMovie
                     getMovie={onTheFlyEdition}
                     interestsArr={interestsArr}
+                    symbolArr={watchList}
                   />
                 </div>
               </Grid>
@@ -127,7 +140,7 @@ function Main() {
         </div>
         <div className="recommended-movies-section"></div>
         <div className="recommended-movies-section-2">
-          <ActiveSymbols />
+          <ActiveSymbols getInitialList={getInitialList} />
         </div>
         <div></div>
       </div>

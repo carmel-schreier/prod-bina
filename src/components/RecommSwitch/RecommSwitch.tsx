@@ -6,9 +6,6 @@ import Switch, { SwitchProps } from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-interface recommProps {
-  handleRecommSwitch: Function;
-}
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -63,16 +60,20 @@ const IOSSwitch = styled((props: SwitchProps) => (
   },
 }));
 
+interface recommProps {
+  handleRecommSwitch: Function;
+}
+
 export default function RecommSwitch(props: recommProps) {
-  const [addRecomm, setAddRecomm] = useState<boolean>(true);
+  //const [addRecomm, setAddRecomm] = useState<boolean>(true);
 
   const recommSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("event = " + event.target.checked);
-    setAddRecomm(event.target.checked);
+    //setAddRecomm(event.target.checked);
 
     props.handleRecommSwitch(event.target.checked);
   };
-  console.log(addRecomm);
+  //console.log(addRecomm);
   return (
     <FormGroup>
       <Stack direction="row" spacing={1} alignItems="center">

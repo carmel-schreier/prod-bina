@@ -5,11 +5,12 @@ import PlayCircleFilledWhiteOutlinedIcon from "@mui/icons-material/PlayCircleFil
 interface GetMovieProps {
   getMovie: Function;
   interestsArr: Array<string>;
+  symbolArr: Array<string>;
 }
 
 function GetMovie(props: GetMovieProps) {
   const handleGetMovieClick = () => {
-    props.getMovie(props.interestsArr);
+    props.getMovie(props.interestsArr, props.symbolArr);
   };
   return (
     <Button

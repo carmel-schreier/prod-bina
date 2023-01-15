@@ -28,6 +28,7 @@ function About() {
             as well as Bitcoin and other cryptocurrencies.
           </p>
         </div>
+        <div className="about-bottom"></div>
       </div>
     </>
   );

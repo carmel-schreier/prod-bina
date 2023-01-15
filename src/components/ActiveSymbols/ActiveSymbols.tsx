@@ -12,15 +12,27 @@ export type ActiveSymbolType = {
   type: string;
 };
 
-function ActiveSymbols() {
+interface activeProps {
+  getInitialList: Function;
+}
+
+function ActiveSymbols(props: activeProps) {
   const [activeSymbols, setActiveSymbols] = useState<Array<ActiveSymbolType>>(
     []
   );
+
+  const [otherActive, setOtherActive] = useState<Array<string>>([
+    "AAPL",
+    "KO",
+    "TSLA",
+  ]);
 
   useEffect(() => {
     const getASymbols = async () => {
       if (activeSymbols.length < 1) {
         const aSymbols = await getActiveSymbols();
+        console.log(aSymbols);
+        getOtherSymbols(aSymbols);
         const activeSymbols =
           aSymbols.length > 3 ? aSymbols.slice(0, 3) : aSymbols;
         console.log(activeSymbols);
@@ -30,11 +42,26 @@ function ActiveSymbols() {
     getASymbols();
   }, []);
 
+  const getOtherSymbols = (aSymbols: Array<ActiveSymbolType>) => {
+    let otherActive = ["AAPL", "KO", "TSLA"];
+    if (aSymbols.length === 4)
+      otherActive = [aSymbols[3].symbol, "AAPL", "TSLA"];
+    if (aSymbols.length === 5)
+      otherActive = [aSymbols[3].symbol, aSymbols[4].symbol, "TSLA"];
+    if (aSymbols.length >= 6)
+      otherActive = [
+        aSymbols[3].symbol,
+        aSymbols[4].symbol,
+        aSymbols[6].symbol,
+      ];
+    props.getInitialList(otherActive);
+  };
+
   const handelGetSymbolMovie = (event: Object, symbol: ActiveSymbolType) => {
     const aSymbol = symbol.symbol;
-    const theHolding = `{"symbol":"${aSymbol}"}`;
-    console.log(theHolding);
-    onTheFlyEdition([], [theHolding]);
+    //const theHolding = `{"symbol":"${aSymbol}"}`;
+    console.log(aSymbol);
+    onTheFlyEdition([], [aSymbol]);
   };
   return (
     <div>

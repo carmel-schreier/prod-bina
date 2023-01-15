@@ -1,6 +1,9 @@
+//import { ActiveSymbolType } from "../components/ActiveSymbols/ActiveSymbols";
+
 export async function onTheFlyEdition(
   interestsArr: Array<string>,
-  symbolsArr: Array<Object>
+  symbolsArr: Array<string>
+  //watchList: Array<string>
 ) {
   const server = "http://gns.vynopsisprod.com";
   //const suite = "QA0";
@@ -8,9 +11,13 @@ export async function onTheFlyEdition(
   const size = "720p"; //'480p','1080p';
   const producer = 118;
   const interests = interestsArr.toString();
+  console.log("symbolsArr = " + symbolsArr);
   //let interestsA = `stocks,stockAdvice,currencies,commodities`;
   console.log("interests = " + interests);
-  const holdings = symbolsArr;
+  const holdings = symbolsArr.map((symbol) => `{"symbol": "${symbol}"}`);
+  console.log("holdings = " + holdings);
+
+  //const theHolding = `{"symbol":"${aSymbol}"}`;
 
   //let holdings = JSON.stringify(symbolsArr);
 
