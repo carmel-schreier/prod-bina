@@ -5,6 +5,7 @@ import {
   PublicOutlined,
   ShowChartOutlined,
 } from "@material-ui/icons";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   CurrencyBitcoinOutlined,
   CurrencyExchangeOutlined,
@@ -25,6 +26,7 @@ interface InterestsProps {
 }
 
 function Interests(props: InterestsProps) {
+  const deskTopSize = useMediaQuery("(min-width:1000px)");
   const [interestsList, setInterestList] = useState<Array<InterestInfoType>>(
     []
   );
@@ -105,7 +107,7 @@ function Interests(props: InterestsProps) {
       <Grid container>
         {interests.map((interest, index) => {
           return (
-            <Grid item md={3} sm={6} xs={12}>
+            <Grid item md={3} sm={6} xs={4}>
               <Grid container>
                 <Grid item xs={12}>
                   <img

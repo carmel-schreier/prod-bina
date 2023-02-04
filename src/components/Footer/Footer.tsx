@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <div className="container">
+      <div className="footerContainer">
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
           <div className="col-md-4 d-flex align-items-center">
             <a
@@ -15,7 +15,7 @@ function Footer() {
               </svg>
             </a>
             <span className="mb-3 mb-md-0 text-muted">
-              &copy; 2022 Vynopsis
+              &copy; 2023 Vynopsis
             </span>
           </div>
 

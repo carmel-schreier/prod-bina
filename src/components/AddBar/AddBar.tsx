@@ -1,3 +1,4 @@
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useFormik } from "formik";
 import { SecurityType } from "../WatchList/WatchList";
 import "./AddBar.css";
@@ -7,6 +8,7 @@ interface AddBarProps {
   onSubmitSec: Function;
 }
 function AddBar(props: AddBarProps) {
+  const deskTopSize = useMediaQuery("(min-width:1000px)");
   const list = props.list;
   const formik = useFormik({
     initialValues: {
@@ -25,8 +27,11 @@ function AddBar(props: AddBarProps) {
     <>
       <div className="add-container">
         <form
-          className="add-form d-flex float-end mb-3 mt-3"
-          //role="search"
+          className={
+            deskTopSize
+              ? "add-form d-flex float-end mb-3 mt-3"
+              : "mobil-add-form d-flex"
+          }
           onSubmit={formik.handleSubmit}
         >
           <select

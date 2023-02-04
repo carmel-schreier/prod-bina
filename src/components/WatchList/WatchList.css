@@ -24,6 +24,11 @@
   --bs-btn-hover-border-color: rgb(211, 52, 52) !important;
 }
 
+.list-mobil {
+  display: flex;
+  flex-direction: row;
+}
+
 /* .list-container { */
 /* background-color: rgb(209, 240, 228); */
 /* height: 50vw; */

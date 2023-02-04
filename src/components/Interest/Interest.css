@@ -8,9 +8,6 @@
 }
 
 .radioContainer {
-  /* height: 20hw; */
-  /* width: 30vw; */
-  /* border: 1px solid black; */
   font-size: 12px;
   margin-top: 3px !important;
 }
@@ -30,4 +27,44 @@
   width: 100px;
   margin-bottom: 20px;
   /* border-radius: 100%; */
+}
+
+.form-label {
+  color: black !important;
+  font-weight: 600 !important;
+  /* font-size: 13px !important; */
+}
+
+.MuiIconButton-label {
+  color: white;
+}
+
+.MuiTypography-body1 {
+  font-size: 12px !important;
+  color: white;
+}
+.MuiSvgIcon-root {
+  height: 17px !important;
+  width: 17px !important;
+}
+
+@media (min-width: 1000px) {
+  .form-label {
+    font-size: 1rem;
+  }
+  .MuiTypography-body1 {
+    font-size: 1rem;
+  }
+
+  .MuiSvgIcon-root {
+    width: 1rem;
+    height: 1rem;
+  }
+  .MuiIconButton-label {
+    color: black;
+  }
+}
+
+.mobil-form {
+  margin-bottom: 20px;
 }

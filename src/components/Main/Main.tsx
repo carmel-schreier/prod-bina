@@ -5,10 +5,12 @@ import GetMovie from "../GetMovie/GetMovie";
 import AddBar from "../AddBar/AddBar";
 import { Grid, Paper } from "@material-ui/core";
 import { ArrowDownward } from "@material-ui/icons";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import RecommSwitch from "../RecommSwitch/RecommSwitch";
 import { onTheFlyEdition } from "../../services/apiService";
 import ActiveSymbols from "../ActiveSymbols/ActiveSymbols";
 import "./Main.css";
+import Footer from "../Footer/Footer";
 
 const securities = [
   { ticker: "AAPL", name: "Apple Inc." },
@@ -20,6 +22,7 @@ const securities = [
 ];
 
 function Main() {
+  const deskTopSize = useMediaQuery("(min-width:1000px)");
   const [watchList, setWatchList] = useState<Array<string>>([
     "AAPL",
     "KO",
@@ -33,8 +36,6 @@ function Main() {
     console.log("otherActive = " + otherActive);
     setWatchList(otherActive);
   };
-
-  //const [includeRecomm, setIncludeRecomm] = useState<boolean>(true);
 
   const getRecommPref = (checked: boolean) => {
     if (checked) {
@@ -92,7 +93,7 @@ function Main() {
         </div>
 
         <div className="middle">
-          <Grid container className="items">
+          <Grid container className="items" justifyContent="center">
             <Grid item md={4} xs={12}>
               <Paper className="square square-1">
                 <h3 className="buy-sell-text">
@@ -124,8 +125,8 @@ function Main() {
               </Paper>
             </Grid>
 
-            <div className="interests-section">
-              <Grid xs={12}>
+            <Grid xs={12} item>
+              <div className="interests-section">
                 <Interests liftInterestsList={updateInterestsList} />
                 <div className="lower-get-movie-btn d-flax align-items-center">
                   <GetMovie
@@ -134,18 +135,48 @@ function Main() {
                     symbolArr={watchList}
                   />
                 </div>
+              </div>
+            </Grid>
+            <div>
+              <Grid xs={9} item>
+                <ActiveSymbols getInitialList={getInitialList} />
               </Grid>
             </div>
+            <Footer />
           </Grid>
         </div>
-        <div className="recommended-movies-section"></div>
-        <div className="recommended-movies-section-2">
-          <ActiveSymbols getInitialList={getInitialList} />
+        <div className="middle-mobil">
+          <div className="square-1-mobil">
+            <h3 className="buy-sell-text">Include Buy/Sell Recommendations</h3>
+            <RecommSwitch handleRecommSwitch={getRecommPref} />
+          </div>
+          <div className="square-2-mobil">
+            <h5>Set your interest preference:</h5>
+            <p>
+              Yes: to always include the subject in your broadcasts. <br />
+              Some-times: to include it only when there are interesting nows or
+              updates. <br /> No: to never include it. <br />
+            </p>
+          </div>
+          <div className="interest-mobil">
+            <Interests liftInterestsList={updateInterestsList} />
+            <GetMovie
+              getMovie={onTheFlyEdition}
+              interestsArr={interestsArr}
+              symbolArr={watchList}
+            />
+          </div>
+          <div className="square-3-mobil">
+            <AddBar list={securities} onSubmitSec={addSecurity} />
+            <WatchList theList={watchList} clearList={resetList} />
+          </div>
         </div>
-        <div></div>
+
+        {deskTopSize && <div className="recommended-movies-section"></div>}
       </div>
+      <div></div>
     </>
   );
 }
-
+//className="recommended-movies-section-2"
 export default Main;

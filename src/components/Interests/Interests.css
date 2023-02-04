@@ -6,8 +6,17 @@
 }
 
 .interest-icon {
-  height: 4vw;
-  width: 4vw;
+  height: 20px;
+  width: 20px;
   margin-bottom: 1vw;
   margin-top: 1.5vw;
+}
+
+@media (min-width: 1000px) {
+  .interest-icon {
+    height: 4vw;
+    width: 4vw;
+    margin-bottom: 1vw;
+    margin-top: 1.5vw;
+  }
 }

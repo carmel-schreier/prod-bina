@@ -1,3 +1,4 @@
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./WatchList.css";
 
 export type SecurityType = {
@@ -10,18 +11,21 @@ interface listProps {
   clearList: Function;
 }
 function WatchList(props: listProps) {
+  const deskTopSize = useMediaQuery("(min-width:1000px)");
   const handleClearClick = () => {
     props.clearList();
   };
   return (
     <>
       <div className="list-container ms-4 mt-2">
-        <p className="list-title">Your Watch List:</p>
-        <ul className="list">
-          {props.theList.map((ticker: string, index) => (
-            <li key={index}>{ticker}</li>
-          ))}
-        </ul>
+        <div className={deskTopSize ? "list-desk-top" : "list-mobil"}>
+          <p className="list-title">Your Watch List:</p>
+          <ul className="list">
+            {props.theList.map((ticker: string, index) => (
+              <li key={index}>{ticker}</li>
+            ))}
+          </ul>
+        </div>
         <button
           type="button"
           className="btn btn-secondary ms-1"

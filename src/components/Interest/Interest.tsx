@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import "./Interest.css";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export type InterestType = {
   imageUrl: string;
@@ -30,6 +31,7 @@ export interface RadioProps {
 }
 
 function Interest(props: InterestProps) {
+  const deskTopSize = useMediaQuery("(min-width:1000px)");
   const { data } = props;
   const [selectedBtn, setSelectedBtn] = useState("Some-times");
 
@@ -48,33 +50,34 @@ function Interest(props: InterestProps) {
   return (
     <>
       <FormControl>
-        <FormLabel>{data.name}</FormLabel>
+        <FormLabel className="form-label">{data.name}</FormLabel>
         <RadioGroup
-          row
+          row={deskTopSize}
           aria-label="gender"
           name="gender1"
           value={selectedBtn}
           onChange={(e) => {
             handleRadioClick(e);
           }}
+          className={deskTopSize ? "deskTop-form" : "mobil-form"}
         >
           <FormControlLabel
             value="Yes"
             control={<Radio />}
             label="Yes"
-            // style={{ color: "green" }}
+            className="form-option"
           />
           <FormControlLabel
             value="Some-times"
             control={<Radio color="primary" />}
             label="Some-times"
-            // style={{ color: "orange" }}
+            className="form-option"
           />
           <FormControlLabel
             value="No"
             control={<Radio />}
             label="No"
-            // style={{ color: "red" }}
+            className="form-option"
           />
         </RadioGroup>
       </FormControl>

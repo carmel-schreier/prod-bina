@@ -83,8 +83,20 @@ function ActiveSymbols(props: activeProps) {
           return (
             <Grid
               item
-              md={4}
-              sm={4}
+              md={
+                activeSymbols.length === 3
+                  ? 4
+                  : activeSymbols.length === 2
+                  ? 6
+                  : 12
+              }
+              sm={
+                activeSymbols.length === 3
+                  ? 4
+                  : activeSymbols.length === 2
+                  ? 6
+                  : 12
+              }
               xs={12}
               style={{
                 textAlign: "center",
