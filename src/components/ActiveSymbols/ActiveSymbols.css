@@ -1,6 +1,11 @@
 .symbols-section {
   background-color: #accaac;
-  /* width: 90vw; */
-  margin-top: 4vw;
-  padding: 2vw;
+  padding: 10px;
+}
+
+@media (min-width: 1000px) {
+  .symbols-section {
+    margin-top: 4vw;
+    padding: 2vw;
+  }
 }

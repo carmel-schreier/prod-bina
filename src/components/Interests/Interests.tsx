@@ -107,7 +107,7 @@ function Interests(props: InterestsProps) {
       <Grid container>
         {interests.map((interest, index) => {
           return (
-            <Grid item md={3} sm={6} xs={4}>
+            <Grid item md={3} sm={4} xs={4}>
               <Grid container>
                 <Grid item xs={12}>
                   <img

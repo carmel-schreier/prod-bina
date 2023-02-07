@@ -25,7 +25,7 @@ function GetMovie(props: GetMovieProps) {
         deskTopSize
           ? { fontSize: "1.8vw", borderRadius: "20px" }
           : {
-              fontSize: "10px",
+              fontSize: "11px",
               borderRadius: "20px",
               fontWeight: "700",
               padding: "5px",

@@ -86,9 +86,9 @@ function Main() {
             />
           </div>
           <p className=" top-par">
-            Please set your interests preference and your securities watch-list,
-            so that we can provide you movies with financial information best
-            suited for your needs
+            To watch movies with financial information best suited for your
+            needs, please set your interests preference and your securities
+            watch-list.
           </p>
         </div>
 
@@ -137,12 +137,11 @@ function Main() {
                 </div>
               </div>
             </Grid>
-            <div>
-              <Grid xs={9} item>
+            <div className="recommended-movies-section-2">
+              <Grid xs={11} item>
                 <ActiveSymbols getInitialList={getInitialList} />
               </Grid>
             </div>
-            <Footer />
           </Grid>
         </div>
         <div className="middle-mobil">
@@ -170,10 +169,13 @@ function Main() {
             <AddBar list={securities} onSubmitSec={addSecurity} />
             <WatchList theList={watchList} clearList={resetList} />
           </div>
+          {!deskTopSize && <ActiveSymbols getInitialList={getInitialList} />}
+          {!deskTopSize && <Footer />}
         </div>
 
         {deskTopSize && <div className="recommended-movies-section"></div>}
       </div>
+      {deskTopSize && <Footer />}
       <div></div>
     </>
   );

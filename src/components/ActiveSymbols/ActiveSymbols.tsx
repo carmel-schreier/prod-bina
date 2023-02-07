@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { Button, Typography } from "@material-ui/core";
 import PlayCircleFilledWhiteOutlinedIcon from "@mui/icons-material/PlayCircleFilledWhiteOutlined";
 import "./ActiveSymbols.css";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export type ActiveSymbolType = {
   priority: number;
@@ -17,6 +18,7 @@ interface activeProps {
 }
 
 function ActiveSymbols(props: activeProps) {
+  const deskTopSize = useMediaQuery("(min-width:1000px)");
   const [activeSymbols, setActiveSymbols] = useState<Array<ActiveSymbolType>>(
     []
   );
@@ -69,12 +71,21 @@ function ActiveSymbols(props: activeProps) {
         <Grid item xs={12}>
           <Typography
             variant="h5"
-            style={{
-              textAlign: "center",
-              fontWeight: "500",
-              color: "white",
-              fontSize: "2.2vw",
-            }}
+            style={
+              deskTopSize
+                ? {
+                    textAlign: "center",
+                    fontWeight: "500",
+                    color: "white",
+                    fontSize: "2.2vw",
+                  }
+                : {
+                    textAlign: "center",
+                    fontWeight: "600",
+                    color: "white",
+                    fontSize: "15px",
+                  }
+            }
           >
             Today's Highlighted Securities:
           </Typography>
@@ -83,33 +94,43 @@ function ActiveSymbols(props: activeProps) {
           return (
             <Grid
               item
-              md={
+              xs={
                 activeSymbols.length === 3
                   ? 4
                   : activeSymbols.length === 2
                   ? 6
                   : 12
               }
-              sm={
-                activeSymbols.length === 3
-                  ? 4
-                  : activeSymbols.length === 2
-                  ? 6
-                  : 12
-              }
-              xs={12}
+              // sm={
+              //   activeSymbols.length === 3
+              //     ? 4
+              //     : activeSymbols.length === 2
+              //     ? 6
+              //     : 12
+              // }
+              // xs={12}
               style={{
                 textAlign: "center",
               }}
             >
               <Typography
                 variant="h5"
-                style={{
-                  color: "white",
-                  marginTop: "2vw",
-                  marginBottom: "1.2vw",
-                  fontWeight: "600",
-                }}
+                style={
+                  deskTopSize
+                    ? {
+                        color: "white",
+                        marginTop: "2vw",
+                        marginBottom: "1.2vw",
+                        fontWeight: "600",
+                      }
+                    : {
+                        color: "white",
+                        marginTop: "2vw",
+                        marginBottom: "1.2vw",
+                        fontWeight: "600",
+                        fontSize: "17px",
+                      }
+                }
               >
                 {symbol.symbol}
               </Typography>
@@ -119,11 +140,20 @@ function ActiveSymbols(props: activeProps) {
                 onClick={(event) => handelGetSymbolMovie(event, symbol)}
                 className="get-movie-btn"
                 size="large"
-                style={{
-                  fontSize: "1.5vw",
-                  borderRadius: "15px",
-                  marginBottom: "1vw",
-                }}
+                style={
+                  deskTopSize
+                    ? {
+                        fontSize: "1.5vw",
+                        borderRadius: "15px",
+                        marginBottom: "1vw",
+                      }
+                    : {
+                        fontSize: "9px",
+                        borderRadius: "15px",
+                        marginBottom: "1vw",
+                        fontWeight: "600",
+                      }
+                }
                 startIcon={
                   <PlayCircleFilledWhiteOutlinedIcon
                     style={{ fontSize: "1.5vw" }}

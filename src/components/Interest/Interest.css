@@ -39,29 +39,33 @@
   color: white;
 }
 
-.MuiTypography-body1 {
-  font-size: 12px !important;
-  color: white;
-}
-.MuiSvgIcon-root {
-  height: 17px !important;
-  width: 17px !important;
-}
-
 @media (min-width: 1000px) {
   .form-label {
     font-size: 1rem;
+    color: black !important;
   }
   .MuiTypography-body1 {
-    font-size: 1rem;
+    font-size: 14px !important;
+    color: black !important;
   }
 
-  .MuiSvgIcon-root {
-    width: 1rem;
-    height: 1rem;
-  }
+  /* .MuiSvgIcon-root { */
+  /* width: 1rem !important; */
+  /* height: 1rem !important; */
+  /* } */
   .MuiIconButton-label {
-    color: black;
+    color: black !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .MuiSvgIcon-root {
+    height: 17px !important;
+    width: 17px !important;
+  }
+  .MuiTypography-body1 {
+    font-size: 12px !important;
+    color: white;
   }
 }
 

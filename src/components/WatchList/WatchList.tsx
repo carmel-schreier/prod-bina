@@ -20,7 +20,7 @@ function WatchList(props: listProps) {
       <div className="list-container ms-4 mt-2">
         <div className={deskTopSize ? "list-desk-top" : "list-mobil"}>
           <p className="list-title">Your Watch List:</p>
-          <ul className="list">
+          <ul className={deskTopSize ? "list" : "ul-mobil"}>
             {props.theList.map((ticker: string, index) => (
               <li key={index}>{ticker}</li>
             ))}
