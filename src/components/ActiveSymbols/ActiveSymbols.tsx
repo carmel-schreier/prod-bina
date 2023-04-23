@@ -15,19 +15,21 @@ export type ActiveSymbolType = {
 
 interface activeProps {
   getInitialList: Function;
+  getRecom: string;
 }
 
 function ActiveSymbols(props: activeProps) {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
+  let getRecom = props.getRecom;
   const [activeSymbols, setActiveSymbols] = useState<Array<ActiveSymbolType>>(
     []
   );
 
-  const [otherActive, setOtherActive] = useState<Array<string>>([
-    "AAPL",
-    "KO",
-    "TSLA",
-  ]);
+  //const [otherActive, setOtherActive] = useState<Array<string>>([
+  //  "AAPL",
+  //  "KO",
+  //  "TSLA",
+  //]);
 
   useEffect(() => {
     const getASymbols = async () => {
@@ -37,14 +39,14 @@ function ActiveSymbols(props: activeProps) {
         getOtherSymbols(aSymbols);
         const activeSymbols =
           aSymbols.length > 3 ? aSymbols.slice(0, 3) : aSymbols;
-        console.log(activeSymbols);
         setActiveSymbols([...activeSymbols]);
       }
     };
     getASymbols();
-  }, []);
+  });
 
   const getOtherSymbols = (aSymbols: Array<ActiveSymbolType>) => {
+    console.log(aSymbols[3].symbol, aSymbols[4].symbol);
     let otherActive = ["AAPL", "KO", "TSLA"];
     if (aSymbols.length === 4)
       otherActive = [aSymbols[3].symbol, "AAPL", "TSLA"];
@@ -54,7 +56,7 @@ function ActiveSymbols(props: activeProps) {
       otherActive = [
         aSymbols[3].symbol,
         aSymbols[4].symbol,
-        aSymbols[6].symbol,
+        aSymbols[5].symbol,
       ];
     props.getInitialList(otherActive);
   };
@@ -63,7 +65,7 @@ function ActiveSymbols(props: activeProps) {
     const aSymbol = symbol.symbol;
     //const theHolding = `{"symbol":"${aSymbol}"}`;
     console.log(aSymbol);
-    onTheFlyEdition([], [aSymbol]);
+    onTheFlyEdition([], [aSymbol], getRecom);
   };
   return (
     <div>

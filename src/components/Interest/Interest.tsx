@@ -33,7 +33,7 @@ export interface RadioProps {
 function Interest(props: InterestProps) {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
   const { data } = props;
-  const [selectedBtn, setSelectedBtn] = useState("Some-times");
+  const [selectedBtn, setSelectedBtn] = useState(data.preference);
 
   const handleRadioClick = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -43,7 +43,6 @@ function Interest(props: InterestProps) {
       name: data.name,
       pref: event.currentTarget.value,
     };
-
     props.onChangeInterestInfo(interestInfo);
   };
 

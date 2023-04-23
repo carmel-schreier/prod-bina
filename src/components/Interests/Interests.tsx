@@ -5,7 +5,7 @@ import {
   PublicOutlined,
   ShowChartOutlined,
 } from "@material-ui/icons";
-import useMediaQuery from "@mui/material/useMediaQuery";
+//import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   CurrencyBitcoinOutlined,
   CurrencyExchangeOutlined,
@@ -21,87 +21,95 @@ export interface InterestInfoType {
   pref: string;
 }
 
+const interests = [
+  {
+    imageUrl: "flag-usa-solid.svg",
+    name: `US Markets`,
+    description: `Something something!`,
+    icon: <MonetizationOnOutlined />,
+    id: 1,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: "arrow-trend-up-solid.svg",
+    name: `Stocks`,
+    description: `Something something!`,
+    icon: <ShowChartOutlined />,
+    id: 2,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: `coins-solid.svg`,
+    name: `Currencies`,
+    description: `Something something!`,
+    icon: <CurrencyExchangeOutlined />,
+    id: 4,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: `oil-well-solid.svg`,
+    name: `Commodities`,
+    description: `Something something!`,
+    icon: <OilBarrelOutlined />,
+    id: 5,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: `bitcoin-sign-solid.svg`,
+    name: `Crypto`,
+    description: `Something something!`,
+    icon: <CurrencyBitcoinOutlined />,
+    id: 6,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: `globe-solid.svg`,
+    name: `Global Markets`,
+    description: `Something something!`,
+    icon: <PublicOutlined />,
+    id: 7,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: `sterling-sign-solid.svg`,
+    name: `UK Stocks`,
+    description: `Something something!`,
+    icon: <CurrencyPoundOutlined />,
+    id: 8,
+    preference: "Some-times",
+  },
+  {
+    imageUrl: `money-bill-trend-up-solid.svg`,
+    name: `Bonds`,
+    description: `Something something!`,
+    icon: <MoneyOutlined />,
+    id: 9,
+    preference: "Some-times",
+  },
+];
+
 interface InterestsProps {
   liftInterestsList: Function;
+  interestsPref: Array<InterestInfoType>;
 }
 
 function Interests(props: InterestsProps) {
-  const deskTopSize = useMediaQuery("(min-width:1000px)");
-  const [interestsList, setInterestList] = useState<Array<InterestInfoType>>(
-    []
-  );
-
+  let interestsArr = props.interestsPref;
+  //const deskTopSize = useMediaQuery("(min-width:1000px)");
+  const [interestsList, setInterestList] =
+    useState<Array<InterestInfoType>>(interestsArr);
+  for (let i = 0; i < interestsArr.length; i++) {
+    if (interests[i].preference !== interestsArr[i].pref)
+      interests[i].preference = interestsArr[i].pref;
+  }
   function saveInterestInfo(interestInfo: InterestInfoType) {
-    let check = interestsList.filter((x) => x.name === interestInfo.name);
-    if (check.length === 0) interestsList.push(interestInfo);
-    else {
-      let index = interestsList.indexOf(check[0]);
-      interestInfo.pref !== "Some-times"
-        ? interestsList.splice(index, 1, interestInfo)
-        : interestsList.splice(index, 1);
-    }
+    let check = interestsList.filter((x) => x.name === interestInfo.name)[0];
+    let index = interestsList.indexOf(check);
+    interestsList[index].pref = interestInfo.pref;
     setInterestList([...interestsList]);
     props.liftInterestsList(interestsList);
   }
-  const interests = [
-    {
-      imageUrl: "flag-usa-solid.svg",
-      name: `US Markets`,
-      description: `Something something!`,
-      icon: <MonetizationOnOutlined />,
-      id: 1,
-    },
-    {
-      imageUrl: "arrow-trend-up-solid.svg",
-      name: `Stocks`,
-      description: `Something something!`,
-      icon: <ShowChartOutlined />,
-      id: 2,
-    },
-    {
-      imageUrl: `coins-solid.svg`,
-      name: `Currencies`,
-      description: `Something something!`,
-      icon: <CurrencyExchangeOutlined />,
-      id: 4,
-    },
-    {
-      imageUrl: `oil-well-solid.svg`,
-      name: `Commodities`,
-      description: `Something something!`,
-      icon: <OilBarrelOutlined />,
 
-      id: 5,
-    },
-    {
-      imageUrl: `bitcoin-sign-solid.svg`,
-      name: `Crypto`,
-      description: `Something something!`,
-      icon: <CurrencyBitcoinOutlined />,
-      id: 6,
-    },
-    {
-      imageUrl: `globe-solid.svg`,
-      name: `Global Markets`,
-      description: `Something something!`,
-      icon: <PublicOutlined />,
-      id: 7,
-    },
-    {
-      imageUrl: `sterling-sign-solid.svg`,
-      name: `UK Stocks`,
-      description: `Something something!`,
-      icon: <CurrencyPoundOutlined />,
-      id: 8,
-    },
-    {
-      imageUrl: `money-bill-trend-up-solid.svg`,
-      name: `Bonds`,
-      description: `Something something!`,
-      icon: <MoneyOutlined />,
-      id: 9,
-    },
-  ];
   return (
     <>
       <Grid container>

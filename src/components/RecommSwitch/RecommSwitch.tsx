@@ -62,18 +62,16 @@ const IOSSwitch = styled((props: SwitchProps) => (
 
 interface recommProps {
   handleRecommSwitch: Function;
+  getRecom: string;
 }
 
 export default function RecommSwitch(props: recommProps) {
-  //const [addRecomm, setAddRecomm] = useState<boolean>(true);
-
+  let getRecom = props.getRecom;
+  let recom = getRecom === "true" ? true : false;
   const recommSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("event = " + event.target.checked);
-    //setAddRecomm(event.target.checked);
-
     props.handleRecommSwitch(event.target.checked);
   };
-  //console.log(addRecomm);
   return (
     <FormGroup>
       <Stack direction="row" spacing={1} alignItems="center">
@@ -82,7 +80,7 @@ export default function RecommSwitch(props: recommProps) {
           control={
             <IOSSwitch
               sx={{ m: 1 }}
-              defaultChecked
+              checked={recom}
               onChange={recommSwitchChange}
             />
           }
