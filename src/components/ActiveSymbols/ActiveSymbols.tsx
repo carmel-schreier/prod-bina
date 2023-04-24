@@ -114,6 +114,7 @@ function ActiveSymbols(props: activeProps) {
               style={{
                 textAlign: "center",
               }}
+              key={symbol.symbol}
             >
               <Typography
                 variant="h5"

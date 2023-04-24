@@ -115,7 +115,7 @@ function Interests(props: InterestsProps) {
       <Grid container>
         {interests.map((interest, index) => {
           return (
-            <Grid item md={3} sm={4} xs={4}>
+            <Grid item md={3} sm={4} xs={4} key={interests[index].id}>
               <Grid container>
                 <Grid item xs={12}>
                   <img
@@ -126,7 +126,6 @@ function Interests(props: InterestsProps) {
                 </Grid>
                 <Grid item xs={12}>
                   <Interest
-                    key={interests[index].id}
                     data={interests[index]}
                     onChangeInterestInfo={saveInterestInfo}
                   />
