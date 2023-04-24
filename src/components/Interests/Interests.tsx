@@ -12,15 +12,20 @@ import {
   CurrencyPoundOutlined,
   OilBarrelOutlined,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Interest from "../Interest/Interest";
 import "./Interests.css";
 
-export interface InterestInfoType {
-  name: string;
-  pref: string;
-}
-
+const defaultInterests = [
+  { name: "US Markets", pref: "Some-times" },
+  { name: "Stocks", pref: "Some-times" },
+  { name: "Currencies", pref: "Some-times" },
+  { name: "Commodities", pref: "Some-times" },
+  { name: "Crypto", pref: "Some-times" },
+  { name: "Global Markets", pref: "Some-times" },
+  { name: "UK Stocks", pref: "Some-times" },
+  { name: "Bonds", pref: "Some-times" },
+];
 const interests = [
   {
     imageUrl: "flag-usa-solid.svg",
@@ -88,26 +93,43 @@ const interests = [
   },
 ];
 
+export interface InterestInfoType {
+  name: string;
+  pref: string;
+}
+
 interface InterestsProps {
   liftInterestsList: Function;
-  interestsPref: Array<InterestInfoType>;
 }
 
 function Interests(props: InterestsProps) {
-  let interestsArr = props.interestsPref;
-  //const deskTopSize = useMediaQuery("(min-width:1000px)");
-  const [interestsList, setInterestList] =
-    useState<Array<InterestInfoType>>(interestsArr);
+  const liftInterestsList = props.liftInterestsList;
+
+  const interestData = window.localStorage.getItem("INTERESTS");
+  const initialInterest =
+    interestData !== null && interestData !== "undefined"
+      ? JSON.parse(interestData)
+      : defaultInterests;
+
+  const [interestsArr, setInterestsArr] =
+    useState<Array<InterestInfoType>>(initialInterest);
+
+  useEffect(() => {
+    liftInterestsList(interestsArr);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   for (let i = 0; i < interestsArr.length; i++) {
     if (interests[i].preference !== interestsArr[i].pref)
       interests[i].preference = interestsArr[i].pref;
   }
   function saveInterestInfo(interestInfo: InterestInfoType) {
-    let check = interestsList.filter((x) => x.name === interestInfo.name)[0];
-    let index = interestsList.indexOf(check);
-    interestsList[index].pref = interestInfo.pref;
-    setInterestList([...interestsList]);
-    props.liftInterestsList(interestsList);
+    let check = interestsArr.filter((x) => x.name === interestInfo.name)[0];
+    let index = interestsArr.indexOf(check);
+    interestsArr[index].pref = interestInfo.pref;
+    setInterestsArr([...interestsArr]);
+    window.localStorage.setItem("INTERESTS", JSON.stringify(interestsArr));
+    liftInterestsList(interestsArr);
   }
 
   return (

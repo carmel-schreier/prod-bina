@@ -5,6 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -61,15 +62,31 @@ const IOSSwitch = styled((props: SwitchProps) => (
 
 interface recommProps {
   handleRecommSwitch: Function;
-  getRecom: string;
 }
 
 export default function RecommSwitch(props: recommProps) {
-  let getRecom = props.getRecom;
-  let recom = getRecom === "true" ? true : false;
+  const liftRecomPref = props.handleRecommSwitch;
+
+  const getRecomData = window.localStorage.getItem("GET-RECOM");
+  let initialGetRecom =
+    getRecomData !== null && getRecomData !== "undefined"
+      ? JSON.parse(getRecomData)
+      : true;
+
+  const [getRecom, setGetRecom] = useState(initialGetRecom);
+  console.log("getRecom = ");
+  console.log(getRecom);
+
+  useEffect(() => {
+    liftRecomPref(getRecom);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const recommSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("event = " + event.target.checked);
-    props.handleRecommSwitch(event.target.checked);
+    setGetRecom(event.target.checked);
+    let checked = event.target.checked;
+    window.localStorage.setItem("GET-RECOM", JSON.stringify(checked));
+    liftRecomPref(checked);
   };
   return (
     <FormGroup>
@@ -79,7 +96,7 @@ export default function RecommSwitch(props: recommProps) {
           control={
             <IOSSwitch
               sx={{ m: 1 }}
-              checked={recom}
+              checked={getRecom}
               onChange={recommSwitchChange}
             />
           }

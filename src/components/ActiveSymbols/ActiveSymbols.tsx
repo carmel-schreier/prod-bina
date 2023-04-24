@@ -15,7 +15,7 @@ export type ActiveSymbolType = {
 
 interface activeProps {
   getInitialList: Function;
-  getRecom: string;
+  getRecom: boolean;
 }
 
 function ActiveSymbols(props: activeProps) {

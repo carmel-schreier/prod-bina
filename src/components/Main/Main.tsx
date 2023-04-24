@@ -30,41 +30,13 @@ function Main() {
     storedList = JSON.parse(listData);
   else storedList = ["AAPL", "KO", "TSLA"];
 
+  const [interestsList, setInterestsList] = useState<Array<InterestInfoType>>(
+    []
+  );
+
+  const [recomStatus, setRecomStatus] = useState(true);
+
   const [watchList, setWatchList] = useState<Array<string>>(storedList);
-
-  let interestData = window.localStorage.getItem("INTERESTS");
-  let initialInterest;
-  if (interestData !== null && interestData !== "undefined")
-    initialInterest = JSON.parse(interestData);
-  else
-    initialInterest = [
-      { name: "US Markets", pref: "Some-times" },
-      { name: "Stocks", pref: "Some-times" },
-      { name: "Currencies", pref: "Some-times" },
-      { name: "Commodities", pref: "Some-times" },
-      { name: "Crypto", pref: "Some-times" },
-      { name: "Global Markets", pref: "Some-times" },
-      { name: "UK Stocks", pref: "Some-times" },
-      { name: "Bonds", pref: "Some-times" },
-    ];
-  const [interestsArr, setInterestsArr] =
-    useState<Array<InterestInfoType>>(initialInterest);
-
-  let getRecomData = window.localStorage.getItem("GET-RECOM");
-  let initialGetRecom;
-  if (getRecomData !== null && getRecomData !== "undefined")
-    initialGetRecom = getRecomData;
-  else initialGetRecom = "true";
-
-  const [getRecom, setGetRecom] = useState(initialGetRecom);
-
-  useEffect(() => {
-    window.localStorage.setItem("INTERESTS", JSON.stringify(interestsArr));
-  }, [interestsArr]);
-
-  useEffect(() => {
-    window.localStorage.setItem("GET-RECOM", JSON.stringify(getRecom));
-  }, [getRecom]);
 
   useEffect(() => {
     window.localStorage.setItem("WATCH-LIST", JSON.stringify(watchList));
@@ -73,14 +45,6 @@ function Main() {
   const getInitialList = (otherActive: Array<string>) => {
     if (listData === null && listData === "undefined")
       setWatchList(otherActive);
-  };
-
-  const getRecommPref = (checked: boolean) => {
-    if (checked) {
-      setGetRecom("true");
-    } else {
-      setGetRecom("false");
-    }
   };
 
   const addSecurity = (value: string) => {
@@ -97,7 +61,11 @@ function Main() {
   };
 
   const updateInterestsList = (interestsList: Array<InterestInfoType>) => {
-    setInterestsArr([...interestsList]);
+    setInterestsList([...interestsList]);
+  };
+
+  const getRecommPref = (checked: boolean) => {
+    setRecomStatus(checked);
   };
 
   return (
@@ -108,9 +76,9 @@ function Main() {
           <div className="btn-container">
             <GetMovie
               getMovie={onTheFlyEdition}
-              interestsArr={interestsArr}
+              interestsArr={interestsList}
               symbolArr={watchList}
-              getRecom={getRecom}
+              getRecom={recomStatus}
             />
           </div>
           <p className=" top-par">
@@ -128,7 +96,7 @@ function Main() {
                 </h3>
                 <RecommSwitch
                   handleRecommSwitch={getRecommPref}
-                  getRecom={getRecom}
+                  //getRecom={recomStatus}
                 />
               </Paper>
             </Grid>
@@ -157,16 +125,13 @@ function Main() {
 
             <Grid xs={12} item>
               <div className="interests-section">
-                <Interests
-                  liftInterestsList={updateInterestsList}
-                  interestsPref={interestsArr}
-                />
+                <Interests liftInterestsList={updateInterestsList} />
                 <div className="lower-get-movie-btn d-flax align-items-center">
                   <GetMovie
                     getMovie={onTheFlyEdition}
-                    interestsArr={interestsArr}
+                    interestsArr={interestsList}
                     symbolArr={watchList}
-                    getRecom={getRecom}
+                    getRecom={recomStatus}
                   />
                 </div>
               </div>
@@ -175,7 +140,7 @@ function Main() {
               <Grid xs={11} item>
                 <ActiveSymbols
                   getInitialList={getInitialList}
-                  getRecom={getRecom}
+                  getRecom={recomStatus}
                 />
               </Grid>
             </div>
@@ -186,7 +151,7 @@ function Main() {
             <h3 className="buy-sell-text">Include Buy/Sell Recommendations</h3>
             <RecommSwitch
               handleRecommSwitch={getRecommPref}
-              getRecom={getRecom}
+              //getRecom={recomStatus}
             />
           </div>
           <div className="square-2-mobil">
@@ -198,15 +163,12 @@ function Main() {
             </p>
           </div>
           <div className="interest-mobil">
-            <Interests
-              liftInterestsList={updateInterestsList}
-              interestsPref={interestsArr}
-            />
+            <Interests liftInterestsList={updateInterestsList} />
             <GetMovie
               getMovie={onTheFlyEdition}
-              interestsArr={interestsArr}
+              interestsArr={interestsList}
               symbolArr={watchList}
-              getRecom={getRecom}
+              getRecom={recomStatus}
             />
           </div>
           <div className="square-3-mobil">
@@ -216,7 +178,7 @@ function Main() {
           {!deskTopSize && (
             <ActiveSymbols
               getInitialList={getInitialList}
-              getRecom={getRecom}
+              getRecom={recomStatus}
             />
           )}
           {!deskTopSize && <Footer />}

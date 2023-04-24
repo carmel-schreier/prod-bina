@@ -3,10 +3,10 @@ import { InterestInfoType } from "../components/Interests/Interests";
 export async function onTheFlyEdition(
   interestsArr: Array<InterestInfoType>,
   symbolsArr: Array<string>,
-  getRecom: string
+  getRecom: boolean
 ) {
   let interests: Array<string> = [];
-  getRecom === "true"
+  getRecom === true
     ? interests.push(`stockAdvice`)
     : interests.push(`-stockAdvice`);
   for (let i = 0; i < interestsArr.length; i++) {

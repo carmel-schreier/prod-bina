@@ -8,7 +8,7 @@ interface GetMovieProps {
   getMovie: Function;
   interestsArr: Array<InterestInfoType>;
   symbolArr: Array<string>;
-  getRecom: string;
+  getRecom: boolean;
 }
 
 function GetMovie(props: GetMovieProps) {
