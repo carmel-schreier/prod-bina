@@ -30,13 +30,13 @@ function Main() {
     storedList = JSON.parse(listData);
   else storedList = ["AAPL", "KO", "TSLA"];
 
+  const [watchList, setWatchList] = useState<Array<string>>(storedList);
+
   const [interestsList, setInterestsList] = useState<Array<InterestInfoType>>(
     []
   );
 
   const [recomStatus, setRecomStatus] = useState(true);
-
-  const [watchList, setWatchList] = useState<Array<string>>(storedList);
 
   useEffect(() => {
     window.localStorage.setItem("WATCH-LIST", JSON.stringify(watchList));
@@ -45,6 +45,10 @@ function Main() {
   const getInitialList = (otherActive: Array<string>) => {
     if (listData === null && listData === "undefined")
       setWatchList(otherActive);
+  };
+
+  const getRecommPref = (checked: boolean) => {
+    setRecomStatus(checked);
   };
 
   const addSecurity = (value: string) => {
@@ -62,10 +66,6 @@ function Main() {
 
   const updateInterestsList = (interestsList: Array<InterestInfoType>) => {
     setInterestsList([...interestsList]);
-  };
-
-  const getRecommPref = (checked: boolean) => {
-    setRecomStatus(checked);
   };
 
   return (
@@ -94,10 +94,7 @@ function Main() {
                 <h3 className="buy-sell-text">
                   Include Buy/Sell Recommendations
                 </h3>
-                <RecommSwitch
-                  handleRecommSwitch={getRecommPref}
-                  //getRecom={recomStatus}
-                />
+                <RecommSwitch handleRecommSwitch={getRecommPref} />
               </Paper>
             </Grid>
             <Grid item md={4} xs={12}>
@@ -149,10 +146,7 @@ function Main() {
         <div className="middle-mobil">
           <div className="square-1-mobil">
             <h3 className="buy-sell-text">Include Buy/Sell Recommendations</h3>
-            <RecommSwitch
-              handleRecommSwitch={getRecommPref}
-              //getRecom={recomStatus}
-            />
+            <RecommSwitch handleRecommSwitch={getRecommPref} />
           </div>
           <div className="square-2-mobil">
             <h5>Set your interest preference:</h5>
