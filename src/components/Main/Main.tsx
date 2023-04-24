@@ -12,23 +12,15 @@ import ActiveSymbols from "../ActiveSymbols/ActiveSymbols";
 import "./Main.css";
 import Footer from "../Footer/Footer";
 
-const securities = [
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "KO", name: "The Coca-Cola Company" },
-  { ticker: "TSLA", name: "Tesla Inc." },
-  { ticker: "C", name: "Citigroup Inc." },
-  { ticker: "JPM", name: "JPMorgan Chase & Co." },
-  { ticker: "AMZN", name: "Amazon.com, Inc." },
-];
-
 function Main() {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
 
+  const [apiWatchList, setApiWatchList] = useState<Array<string>>([]);
   let listData = window.localStorage.getItem("WATCH-LIST");
-  let storedList: Array<string>;
-  if (listData !== null && listData !== "undefined")
-    storedList = JSON.parse(listData);
-  else storedList = ["AAPL", "KO", "TSLA"];
+  let storedList =
+    listData !== null && listData !== "undefined"
+      ? JSON.parse(listData)
+      : apiWatchList;
 
   const [watchList, setWatchList] = useState<Array<string>>(storedList);
 
@@ -43,8 +35,7 @@ function Main() {
   }, [watchList]);
 
   const getInitialList = (otherActive: Array<string>) => {
-    if (listData === null && listData === "undefined")
-      setWatchList(otherActive);
+    setApiWatchList(otherActive);
   };
 
   const getRecommPref = (checked: boolean) => {
@@ -59,9 +50,10 @@ function Main() {
       setWatchList([...watchList]);
     }
   };
+
   const resetList = () => {
     localStorage.removeItem("WATCH-LIST");
-    setWatchList([]);
+    setWatchList(apiWatchList);
   };
 
   const updateInterestsList = (interestsList: Array<InterestInfoType>) => {
@@ -115,7 +107,7 @@ function Main() {
             </Grid>
             <Grid item md={4} xs={12}>
               <Paper className="square square-3">
-                <AddBar list={securities} onSubmitSec={addSecurity} />
+                <AddBar onSubmitSec={addSecurity} />
                 <WatchList theList={watchList} clearList={resetList} />
               </Paper>
             </Grid>
@@ -166,7 +158,7 @@ function Main() {
             />
           </div>
           <div className="square-3-mobil">
-            <AddBar list={securities} onSubmitSec={addSecurity} />
+            <AddBar onSubmitSec={addSecurity} />
             <WatchList theList={watchList} clearList={resetList} />
           </div>
           {!deskTopSize && (

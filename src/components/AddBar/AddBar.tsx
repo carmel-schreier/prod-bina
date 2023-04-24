@@ -3,13 +3,22 @@ import { useFormik } from "formik";
 import { SecurityType } from "../WatchList/WatchList";
 import "./AddBar.css";
 
+const securities = [
+  { ticker: "AAPL", name: "Apple Inc." },
+  { ticker: "KO", name: "The Coca-Cola Company" },
+  { ticker: "TSLA", name: "Tesla Inc." },
+  { ticker: "C", name: "Citigroup Inc." },
+  { ticker: "JPM", name: "JPMorgan Chase & Co." },
+  { ticker: "AMZN", name: "Amazon.com, Inc." },
+];
+
 interface AddBarProps {
-  list: Array<SecurityType>;
+  //list: Array<SecurityType>;
   onSubmitSec: Function;
 }
 function AddBar(props: AddBarProps) {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
-  const list = props.list;
+  //const list = props.list;
   const formik = useFormik({
     initialValues: {
       ticker: "",
@@ -43,7 +52,7 @@ function AddBar(props: AddBarProps) {
           >
             <option>Add to watch list</option>
             {/* <option value={""}>Add to your watch-list</option> */}
-            {list.map((security: SecurityType, index) => (
+            {securities.map((security: SecurityType, index) => (
               <option key={index} value={security.ticker}>
                 {security.ticker} - {security.name}
               </option>
