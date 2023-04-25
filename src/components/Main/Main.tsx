@@ -1,8 +1,6 @@
 import Interests, { InterestInfoType } from "../Interests/Interests";
-import { useEffect, useState } from "react";
-import WatchList from "../WatchList/WatchList";
+import { useState } from "react";
 import GetMovie from "../GetMovie/GetMovie";
-import AddBar from "../AddBar/AddBar";
 import { Grid, Paper } from "@material-ui/core";
 import { ArrowDownward } from "@material-ui/icons";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -11,53 +9,33 @@ import { onTheFlyEdition } from "../../services/apiService";
 import ActiveSymbols from "../ActiveSymbols/ActiveSymbols";
 import "./Main.css";
 import Footer from "../Footer/Footer";
+import List from "../List/List";
 
 function Main() {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
 
-  const [apiWatchList, setApiWatchList] = useState<Array<string>>([]);
-  let listData = window.localStorage.getItem("WATCH-LIST");
-  let storedList =
-    listData !== null && listData !== "undefined"
-      ? JSON.parse(listData)
-      : apiWatchList;
-
-  const [watchList, setWatchList] = useState<Array<string>>(storedList);
-
   const [interestsList, setInterestsList] = useState<Array<InterestInfoType>>(
     []
   );
-
-  const [recomStatus, setRecomStatus] = useState(true);
-
-  useEffect(() => {
-    window.localStorage.setItem("WATCH-LIST", JSON.stringify(watchList));
-  }, [watchList]);
-
-  const getInitialList = (otherActive: Array<string>) => {
-    setApiWatchList(otherActive);
+  const updateInterestsList = (interestsList: Array<InterestInfoType>) => {
+    setInterestsList([...interestsList]);
   };
 
+  const [recomStatus, setRecomStatus] = useState(true);
   const getRecommPref = (checked: boolean) => {
     setRecomStatus(checked);
   };
 
-  const addSecurity = (value: string) => {
-    let test = watchList.filter((x) => x === value)[0];
-    if (!test) {
-      watchList.splice(2, 1);
-      watchList.unshift(value);
-      setWatchList([...watchList]);
-    }
+  const [securityList, setSecurityList] = useState<Array<string>>([]);
+
+  const liftSecurityList = (otherActive: Array<string>) => {
+    setSecurityList(otherActive);
   };
 
-  const resetList = () => {
-    localStorage.removeItem("WATCH-LIST");
-    setWatchList(apiWatchList);
-  };
+  const [apiWatchList, setApiWatchList] = useState<Array<string>>([]);
 
-  const updateInterestsList = (interestsList: Array<InterestInfoType>) => {
-    setInterestsList([...interestsList]);
+  const getApiWatchList = (otherActive: Array<string>) => {
+    setApiWatchList(otherActive);
   };
 
   return (
@@ -69,7 +47,7 @@ function Main() {
             <GetMovie
               getMovie={onTheFlyEdition}
               interestsArr={interestsList}
-              symbolArr={watchList}
+              symbolArr={securityList}
               getRecom={recomStatus}
             />
           </div>
@@ -107,8 +85,12 @@ function Main() {
             </Grid>
             <Grid item md={4} xs={12}>
               <Paper className="square square-3">
-                <AddBar onSubmitSec={addSecurity} />
-                <WatchList theList={watchList} clearList={resetList} />
+                {/* <AddBar onSubmitSec={addSecurity} /> */}
+                {/* <WatchList theList={watchList} clearList={resetList} /> */}
+                <List
+                  apiList={apiWatchList}
+                  liftSecurityList={liftSecurityList}
+                />
               </Paper>
             </Grid>
 
@@ -119,7 +101,7 @@ function Main() {
                   <GetMovie
                     getMovie={onTheFlyEdition}
                     interestsArr={interestsList}
-                    symbolArr={watchList}
+                    symbolArr={securityList}
                     getRecom={recomStatus}
                   />
                 </div>
@@ -128,7 +110,7 @@ function Main() {
             <div className="recommended-movies-section-2">
               <Grid xs={11} item>
                 <ActiveSymbols
-                  getInitialList={getInitialList}
+                  getInitialList={getApiWatchList}
                   getRecom={recomStatus}
                 />
               </Grid>
@@ -153,17 +135,18 @@ function Main() {
             <GetMovie
               getMovie={onTheFlyEdition}
               interestsArr={interestsList}
-              symbolArr={watchList}
+              symbolArr={securityList}
               getRecom={recomStatus}
             />
           </div>
           <div className="square-3-mobil">
-            <AddBar onSubmitSec={addSecurity} />
-            <WatchList theList={watchList} clearList={resetList} />
+            <List apiList={apiWatchList} liftSecurityList={liftSecurityList} />
+            {/* <AddBar onSubmitSec={addSecurity} /> */}
+            {/* <WatchList theList={watchList} clearList={resetList} /> */}
           </div>
           {!deskTopSize && (
             <ActiveSymbols
-              getInitialList={getInitialList}
+              getInitialList={getApiWatchList}
               getRecom={recomStatus}
             />
           )}

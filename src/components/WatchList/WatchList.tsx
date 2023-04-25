@@ -6,11 +6,11 @@ export type SecurityType = {
   ticker: string;
 };
 
-interface listProps {
+interface watchListProps {
   theList: Array<string>;
   clearList: Function;
 }
-function WatchList(props: listProps) {
+function WatchList(props: watchListProps) {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
   const handleClearClick = () => {
     props.clearList();
