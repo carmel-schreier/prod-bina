@@ -17,7 +17,7 @@ import Interest from "../Interest/Interest";
 import "./Interests.css";
 
 const defaultInterests = [
-  { name: "US Markets", URLname: "usMarkets", pref: "Some-times" },
+  { name: "US Markets", URLname: "usMarket", pref: "Some-times" },
   { name: "Stocks", URLname: "stocks", pref: "Some-times" },
   { name: "Currencies", URLname: "currencies", pref: "Some-times" },
   { name: "Commodities", URLname: "commodities", pref: "Some-times" },
