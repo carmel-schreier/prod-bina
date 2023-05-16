@@ -11,9 +11,9 @@ export async function onTheFlyEdition(
     : interests.push(`-stockAdvice`);
   for (let i = 0; i < interestsArr.length; i++) {
     if (interestsArr[i].pref === "Yes")
-      interests.push(`${interestsArr[i].name}`);
+      interests.push(`${interestsArr[i].URLname}`);
     if (interestsArr[i].pref === "No")
-      interests.push(`-${interestsArr[i].name}`);
+      interests.push(`-${interestsArr[i].URLname}`);
   }
   console.log(" interests = ");
   console.log(interests);

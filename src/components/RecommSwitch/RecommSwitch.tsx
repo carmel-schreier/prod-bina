@@ -74,13 +74,15 @@ export default function RecommSwitch(props: recommProps) {
       : true;
 
   const [getRecom, setGetRecom] = useState(initialGetRecom);
-  console.log("getRecom = ");
-  console.log(getRecom);
+  //console.log("getRecom = ");
+  //console.log(getRecom);
 
   useEffect(() => {
     liftRecomPref(getRecom);
+    console.log("getRecom = ");
+    console.log(getRecom);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const recommSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGetRecom(event.target.checked);

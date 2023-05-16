@@ -17,19 +17,20 @@ import Interest from "../Interest/Interest";
 import "./Interests.css";
 
 const defaultInterests = [
-  { name: "US Markets", pref: "Some-times" },
-  { name: "Stocks", pref: "Some-times" },
-  { name: "Currencies", pref: "Some-times" },
-  { name: "Commodities", pref: "Some-times" },
-  { name: "Crypto", pref: "Some-times" },
-  { name: "Global Markets", pref: "Some-times" },
-  { name: "UK Stocks", pref: "Some-times" },
-  { name: "Bonds", pref: "Some-times" },
+  { name: "US Markets", URLname: "usMarkets", pref: "Some-times" },
+  { name: "Stocks", URLname: "stocks", pref: "Some-times" },
+  { name: "Currencies", URLname: "currencies", pref: "Some-times" },
+  { name: "Commodities", URLname: "commodities", pref: "Some-times" },
+  { name: "Crypto", URLname: "crypto", pref: "Some-times" },
+  { name: "Global Markets", URLname: "globalMarkets", pref: "Some-times" },
+  { name: "UK Stocks", URLname: "ukStocks", pref: "Some-times" },
+  { name: "Bonds", URLname: "bonds", pref: "Some-times" },
 ];
 const interests = [
   {
     imageUrl: "flag-usa-solid.svg",
     name: `US Markets`,
+    URLname: `usMarket`,
     description: `Something something!`,
     icon: <MonetizationOnOutlined />,
     id: 1,
@@ -38,6 +39,7 @@ const interests = [
   {
     imageUrl: "arrow-trend-up-solid.svg",
     name: `Stocks`,
+    URLname: `stocks`,
     description: `Something something!`,
     icon: <ShowChartOutlined />,
     id: 2,
@@ -46,6 +48,7 @@ const interests = [
   {
     imageUrl: `coins-solid.svg`,
     name: `Currencies`,
+    URLname: `currencies`,
     description: `Something something!`,
     icon: <CurrencyExchangeOutlined />,
     id: 4,
@@ -54,6 +57,7 @@ const interests = [
   {
     imageUrl: `oil-well-solid.svg`,
     name: `Commodities`,
+    URLname: `commodities`,
     description: `Something something!`,
     icon: <OilBarrelOutlined />,
     id: 5,
@@ -62,6 +66,7 @@ const interests = [
   {
     imageUrl: `bitcoin-sign-solid.svg`,
     name: `Crypto`,
+    URLname: `crypto`,
     description: `Something something!`,
     icon: <CurrencyBitcoinOutlined />,
     id: 6,
@@ -70,6 +75,7 @@ const interests = [
   {
     imageUrl: `globe-solid.svg`,
     name: `Global Markets`,
+    URLname: `globalMarkets`,
     description: `Something something!`,
     icon: <PublicOutlined />,
     id: 7,
@@ -78,6 +84,7 @@ const interests = [
   {
     imageUrl: `sterling-sign-solid.svg`,
     name: `UK Stocks`,
+    URLname: `ukStocks`,
     description: `Something something!`,
     icon: <CurrencyPoundOutlined />,
     id: 8,
@@ -86,6 +93,7 @@ const interests = [
   {
     imageUrl: `money-bill-trend-up-solid.svg`,
     name: `Bonds`,
+    URLname: `bonds`,
     description: `Something something!`,
     icon: <MoneyOutlined />,
     id: 9,
@@ -95,6 +103,7 @@ const interests = [
 
 export interface InterestInfoType {
   name: string;
+  URLname: string;
   pref: string;
 }
 
@@ -113,6 +122,8 @@ function Interests(props: InterestsProps) {
 
   const [interestsArr, setInterestsArr] =
     useState<Array<InterestInfoType>>(initialInterest);
+  console.log("I'm interestsArr");
+  console.log(interestsArr);
 
   useEffect(() => {
     liftInterestsList(interestsArr);

@@ -12,6 +12,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 export type InterestType = {
   imageUrl: string;
   name: string;
+  URLname: string;
   description: string;
   id: number;
   preference?: string;
@@ -41,6 +42,7 @@ function Interest(props: InterestProps) {
     setSelectedBtn(event.currentTarget.value);
     const interestInfo = {
       name: data.name,
+      URLname: data.URLname,
       pref: event.currentTarget.value,
     };
     props.onChangeInterestInfo(interestInfo);

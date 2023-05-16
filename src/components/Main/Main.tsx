@@ -28,8 +28,8 @@ function Main() {
 
   const [securityList, setSecurityList] = useState<Array<string>>([]);
 
-  const liftSecurityList = (otherActive: Array<string>) => {
-    setSecurityList(otherActive);
+  const liftSecurityList = (watchList: Array<string>) => {
+    setSecurityList(watchList);
   };
 
   const [apiWatchList, setApiWatchList] = useState<Array<string>>([]);
