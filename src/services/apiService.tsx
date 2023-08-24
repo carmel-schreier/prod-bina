@@ -3,7 +3,8 @@ import { InterestInfoType } from "../components/Interests/Interests";
 export async function onTheFlyEdition(
   interestsArr: Array<InterestInfoType>,
   symbolsArr: Array<string>,
-  getRecom: boolean
+  getRecom: boolean,
+  format: string
 ) {
   let interests: Array<string> = [];
   getRecom === true
@@ -15,20 +16,24 @@ export async function onTheFlyEdition(
     if (interestsArr[i].pref === "No")
       interests.push(`-${interestsArr[i].URLname}`);
   }
-  console.log(" interests = ");
-  console.log(interests);
+  //console.log(" interests = ");
+  //console.log(interests);
   const server = "http://gns.vynopsisprod.com";
   //const suite = "QA0";
   const uid = 1235;
-  const size = "720p"; //'480p','1080p';
+  const deviseSize = format === "laptop" ? "1080h" : "1080v";
+  const size = deviseSize; //"1080v"; '', "p","480p","720p";
+  //console.log("final size = " + size);
   const producer = 118;
   let interestsString = interests.toString();
-  console.log("symbolsArr = ");
-  console.log(symbolsArr);
+  //console.log("interestsString = ");
+  //console.log(interestsString);
+  //console.log("symbolsArr = ");
+  //console.log(symbolsArr);
 
   const holdings = symbolsArr.map((symbol) => `{"symbol": "${symbol}"}`);
-  console.log("holdings = ");
-  console.log(holdings);
+  //console.log("holdings = ");
+  //console.log(holdings);
 
   const accJSON = `{"accountId":123,  "accountName":"Michael Golan",
                 "voiceName":"mike",
@@ -47,7 +52,6 @@ export async function onTheFlyEdition(
   })
     .then((response) => response.json())
     .then((response) => {
-      console.log(response);
       window.open(`${server}${response}`, "_blank", "noopener,noreferrer");
     });
 }

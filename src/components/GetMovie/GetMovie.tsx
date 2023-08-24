@@ -9,12 +9,18 @@ interface GetMovieProps {
   interestsArr: Array<InterestInfoType>;
   symbolArr: Array<string>;
   getRecom: boolean;
+  format: string;
 }
 
 function GetMovie(props: GetMovieProps) {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
   const handleGetMovieClick = () => {
-    props.getMovie(props.interestsArr, props.symbolArr, props.getRecom);
+    props.getMovie(
+      props.interestsArr,
+      props.symbolArr,
+      props.getRecom,
+      props.format
+    );
   };
   return (
     <Button

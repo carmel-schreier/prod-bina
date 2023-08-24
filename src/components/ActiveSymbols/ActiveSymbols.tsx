@@ -16,11 +16,13 @@ export type ActiveSymbolType = {
 interface activeProps {
   getInitialList: Function;
   getRecom: boolean;
+  format: string;
 }
 
 function ActiveSymbols(props: activeProps) {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
   let getRecom = props.getRecom;
+  let format = props.format;
   const [activeSymbols, setActiveSymbols] = useState<Array<ActiveSymbolType>>(
     []
   );
@@ -65,7 +67,7 @@ function ActiveSymbols(props: activeProps) {
     const aSymbol = symbol.symbol;
     //const theHolding = `{"symbol":"${aSymbol}"}`;
     console.log(aSymbol);
-    onTheFlyEdition([], [aSymbol], getRecom);
+    onTheFlyEdition([], [aSymbol], getRecom, format);
   };
   return (
     <div>

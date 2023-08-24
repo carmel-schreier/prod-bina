@@ -79,8 +79,8 @@ export default function RecommSwitch(props: recommProps) {
 
   useEffect(() => {
     liftRecomPref(getRecom);
-    console.log("getRecom = ");
-    console.log(getRecom);
+    //console.log("getRecom = ");
+    // console.log(getRecom);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 

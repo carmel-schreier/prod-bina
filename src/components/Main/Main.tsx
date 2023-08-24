@@ -10,6 +10,7 @@ import ActiveSymbols from "../ActiveSymbols/ActiveSymbols";
 import "./Main.css";
 import Footer from "../Footer/Footer";
 import List from "../List/List";
+import DeviseButton from "../DeviseButton/DeviseButton";
 
 function Main() {
   const deskTopSize = useMediaQuery("(min-width:1000px)");
@@ -24,6 +25,11 @@ function Main() {
   const [recomStatus, setRecomStatus] = useState(true);
   const getRecommPref = (checked: boolean) => {
     setRecomStatus(checked);
+  };
+
+  const [devise, setDevise] = useState("phone");
+  const getDevisePref = (size: string) => {
+    setDevise(size);
   };
 
   const [securityList, setSecurityList] = useState<Array<string>>([]);
@@ -49,6 +55,7 @@ function Main() {
               interestsArr={interestsList}
               symbolArr={securityList}
               getRecom={recomStatus}
+              format={devise}
             />
           </div>
           <p className=" top-par">
@@ -103,7 +110,11 @@ function Main() {
                     interestsArr={interestsList}
                     symbolArr={securityList}
                     getRecom={recomStatus}
+                    format={devise}
                   />
+                  <DeviseButton
+                    handleDeviseSwitch={getDevisePref}
+                  ></DeviseButton>
                 </div>
               </div>
             </Grid>
@@ -112,6 +123,7 @@ function Main() {
                 <ActiveSymbols
                   getInitialList={getApiWatchList}
                   getRecom={recomStatus}
+                  format={devise}
                 />
               </Grid>
             </div>
@@ -137,7 +149,9 @@ function Main() {
               interestsArr={interestsList}
               symbolArr={securityList}
               getRecom={recomStatus}
+              format={devise}
             />
+            <DeviseButton handleDeviseSwitch={getDevisePref}></DeviseButton>
           </div>
           <div className="square-3-mobil">
             <List apiList={apiWatchList} liftSecurityList={liftSecurityList} />
@@ -148,6 +162,7 @@ function Main() {
             <ActiveSymbols
               getInitialList={getApiWatchList}
               getRecom={recomStatus}
+              format={devise}
             />
           )}
           {!deskTopSize && <Footer />}
