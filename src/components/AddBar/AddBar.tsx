@@ -1,16 +1,8 @@
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import securities from "./securities-list";
 import { useFormik } from "formik";
 import { SecurityType } from "../WatchList/WatchList";
 import "./AddBar.css";
-
-const securities = [
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "KO", name: "The Coca-Cola Company" },
-  { ticker: "TSLA", name: "Tesla Inc." },
-  { ticker: "C", name: "Citigroup Inc." },
-  { ticker: "JPM", name: "JPMorgan Chase & Co." },
-  { ticker: "AMZN", name: "Amazon.com, Inc." },
-];
 
 interface AddBarProps {
   //list: Array<SecurityType>;
